@@ -1,0 +1,62 @@
+﻿@model BookStore.ViewModels.Books.EditVM
+@using BookStore.Entities;
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Book item = (Book)ViewData["item"];
+}
+
+<td>
+    <fieldset>
+        <legend> Form </legend>
+        <form action="/Books/EditBook" method="post">
+            @Html.HiddenFor(m => m.BookId)
+            <table>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.BookId, null, new { style = "color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td> @Html.LabelFor(m => m.Author) </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Author)
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Author, null, new { style = "color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td> @Html.LabelFor(m => m.Genre) </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Genre)
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Genre, null, new { style = "color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td> @Html.LabelFor(m => m.Name) </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Name)
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Name, null, new { style = "color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Save" />
+                    </td>
+                    <td>
+                        <a href="/Books/Index"> Back to list </a>
+                    </td>
+                </tr>
+
+            </table>
+
+        </form>
+    </fieldset>
+</td>
+

@@ -1,0 +1,61 @@
+﻿@using BookStore.Entities;
+@using Newtonsoft.Json;
+
+<html>
+<head>
+    <title>
+        Book Store
+    </title>
+</head>
+<body>
+    <div>
+        <table style="width:100%;">
+            <tr>
+                <td>
+                    <h1 style="float:left;"> Book Store </h1>
+                    <div style="float:right;">
+
+                        @{
+                            // Deserialize the user object from session
+                            var userJson = ViewContext.HttpContext.Session.GetString("loggedUser");
+                            var loggedUser = userJson != null ? JsonConvert.DeserializeObject<User>(userJson) : null;
+                        }
+
+                        @if (loggedUser == null)
+                        {
+                            <p>Hello, <strong>Anonymous</strong>!</p>
+                            <a href="/Home/Login"> Login </a>
+                            <a href="/Home/Register" style="margin:0 10px"> Register</a>
+                        }
+                        else
+                        {
+                            <p>Hello, <strong>@loggedUser.Username</strong>!</p>
+                            <a href="/Home/Logout"> Logout </a>
+                        }
+                        
+
+
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul style="list-style:none;">
+                        <li style="float:left; margin: 0 10px;"> <a href="/home/index"> Home</a> </li>
+                        <li style="float:left; margin: 0 10px;"> <a href="/user/index"> Users </a></li>
+                        <li style="float:left; margin: 0 10px;"> <a href="/books/index"> Books </a></li>
+                        <li style="float:left; margin: 0 10px;"> <a href="/contacts/index"> Contacts </a></li>
+                    </ul>
+
+                </td>
+            </tr>
+            <tr>
+
+                @RenderBody()
+
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

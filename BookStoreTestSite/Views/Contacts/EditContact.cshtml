@@ -1,0 +1,39 @@
+﻿@model BookStore.ViewModels.Contacts.EditVM
+@using BookStore.Entities;
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Contact item = (Contact)ViewData["item"];
+}
+
+<td>
+    <fieldset>
+        <legend> Form </legend>
+        <form action="/Contacts/EditContact" method="post">
+            @Html.HiddenFor(m => m.ContactId)
+            <table>
+                <tr>
+                    <td> @Html.LabelFor(m => m.PhoneNumber) </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { style = "color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Save" />
+                    </td>
+                    <td>
+                        <a href="/Contacts/Index"> Back to list </a>
+                    </td>
+                </tr>
+
+            </table>
+
+        </form>
+    </fieldset>
+</td>
+

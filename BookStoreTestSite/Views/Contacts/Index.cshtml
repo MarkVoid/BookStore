@@ -1,0 +1,30 @@
+﻿@using BookStore.Entities;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<td>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>PhoneNumber</td>
+            <td> </td>
+        </tr>
+
+        @foreach (Contact item in (List<Contact>)ViewData["items"])
+        {
+            <tr>
+                <td> @item.ContactId </td>
+                <td> @item.PhoneNumber </td>
+                <td>
+                    <a href="/Contacts/Edit?id=@item.ContactId" style="margin:0 10px"> Edit </a>
+                    <a href="/Contacts/Delete?id=@item.ContactId" style="margin:0 10px"> Delete </a>
+                    <a href="/Contacts/AddContact" style="margin:0 10px"> Add Contact</a>
+                </td>
+            </tr>
+
+        }
+    </table>
+</td>
+
