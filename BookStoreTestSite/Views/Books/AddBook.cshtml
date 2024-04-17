@@ -7,17 +7,12 @@
     Book item = (Book)ViewData["item"];
 }
 
-<td>
+<td style="background-color:#e6e6e6;">
     <fieldset>
         <legend> Form </legend>
-        <form action="/Books/AddBook" method="post">
+        <form action="/Books/EditBook" method="post">
             @Html.HiddenFor(m => m.BookId)
             <table>
-                <tr>
-                    <td>
-                        @Html.ValidationMessageFor(m => m.BookId, null, new { style = "color:red" })
-                    </td>
-                </tr>
                 <tr>
                     <td> @Html.LabelFor(m => m.Author) </td>
                     <td>
@@ -53,10 +48,7 @@
                         <a href="/Books/Index"> Back to list </a>
                     </td>
                 </tr>
-
             </table>
-
         </form>
     </fieldset>
 </td>
-

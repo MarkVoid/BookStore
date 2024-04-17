@@ -9,7 +9,7 @@
         <tr>
             <td>Id</td>
             <td>PhoneNumber</td>
-            <td> </td>
+            <td><a href="/Contacts/AddContact" style="margin:0 10px"> Add Contact</a> </td>
         </tr>
 
         @foreach (Contact item in (List<Contact>)ViewData["items"])
@@ -18,9 +18,8 @@
                 <td> @item.ContactId </td>
                 <td> @item.PhoneNumber </td>
                 <td>
-                    <a href="/Contacts/Edit?id=@item.ContactId" style="margin:0 10px"> Edit </a>
+                    <a href="/Contacts/EditContact?id=@item.ContactId" style="margin:0 10px"> Edit </a>
                     <a href="/Contacts/Delete?id=@item.ContactId" style="margin:0 10px"> Delete </a>
-                    <a href="/Contacts/AddContact" style="margin:0 10px"> Add Contact</a>
                 </td>
             </tr>
 

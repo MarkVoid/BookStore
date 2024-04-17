@@ -3,6 +3,7 @@ using BookStore.Entities;
 using BookStore.ViewModels.Books;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookStore.Controllers
 {
@@ -55,8 +56,17 @@ namespace BookStore.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            var userJson = HttpContext.Session.GetString("loggedUser");
+            var loggedUser = userJson != null ? JsonConvert.DeserializeObject<User>(userJson) : null;
+
+            if (loggedUser == null)
+            {
+                RedirectToAction("Index", "Home");
+            }
+
             Book item = new Book();
             item.BookId = model.BookId;
+            item.UserId = loggedUser.UserId;
             item.Author = model.Author;
             item.Genre = model.Genre;
             item.Name = model.Name;
@@ -68,6 +78,15 @@ namespace BookStore.Controllers
                 _booksRepository.Insert(item);
 
             return RedirectToAction("Index", "Books");
+        }
+        public ActionResult AddBook()
+        {
+            if (HttpContext.Session.GetString("loggedUser") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            EditVM model = new EditVM();
+            return View(model);
         }
         public ActionResult Delete(int id)
         {

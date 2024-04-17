@@ -32,7 +32,7 @@ namespace BookStore.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult EditContact(int? id)
         {
 
             if (HttpContext.Session.GetString("loggedUser") == null)
@@ -51,17 +51,22 @@ namespace BookStore.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit(EditVM model)
+        public ActionResult EditContact(EditVM model)
         {
-            if (HttpContext.Session.GetString("loggedUser") == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
             if (!ModelState.IsValid)
                 return View(model);
 
+            var userJson = HttpContext.Session.GetString("loggedUser");
+            var loggedUser = userJson != null ? JsonConvert.DeserializeObject<User>(userJson) : null;
+
+            if (loggedUser == null)
+            {
+                RedirectToAction("Index", "Home");
+            }
+
             Contact item = new Contact();
             item.ContactId = model.ContactId;
+            item.UserId = loggedUser.UserId;
             item.PhoneNumber = model.PhoneNumber;
 
 
@@ -72,18 +77,24 @@ namespace BookStore.Controllers
 
             return RedirectToAction("Index", "Contacts");
         }
+        public ActionResult AddContact()
+        {
+            if (HttpContext.Session.GetString("loggedUser") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            EditVM model = new EditVM();
+            return View(model);
+        }
         public ActionResult Delete(int id)
         {
             if (HttpContext.Session.GetString("loggedUser") == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-
             _contactsRepository.Delete(id);
 
-
             return RedirectToAction("Index");
-
         }
     }
 }

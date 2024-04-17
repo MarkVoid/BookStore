@@ -4,13 +4,13 @@
     ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    Book item = (Book)ViewData["item"];
+    Contact item = (Contact)ViewData["item"];
 }
 
-<td>
+<td style="background-color:#e6e6e6;">
     <fieldset>
         <legend> Form </legend>
-        <form action="/Contacts/AddContact" method="post">
+        <form action="/Contacts/EditContact" method="post">
             @Html.HiddenFor(m => m.ContactId)
             <table>
                 <tr>

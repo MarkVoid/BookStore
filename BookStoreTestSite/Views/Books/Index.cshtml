@@ -11,6 +11,7 @@
             <td>Author </td>
             <td>Genre </td>
             <td> Name</td>
+            <td> <a href="/Books/AddBook" style="margin:0 10px"> Add Book</a></td>
         </tr>
 
         @foreach (Book item in (List<Book>)ViewData["items"])
@@ -21,9 +22,8 @@
                 <td> @item.Genre </td>
                 <td> @item.Name </td>
                 <td>
-                    <a href="/Books/Edit?id=@item.BookId" style="margin:0 10px"> Edit </a>
+                    <a href="/Books/EditBook?id=@item.BookId" style="margin:0 10px"> Edit </a>
                     <a href="/Books/Delete?id=@item.BookId" style="margin:0 10px"> Delete </a>
-                    <a href="/Books/AddBook" style="margin:0 10px"> Add Book</a>
                 </td>
             </tr>
 
